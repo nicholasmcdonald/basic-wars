@@ -19,8 +19,8 @@ public class InputManager : MonoBehaviour
         inputThisFrame = new Dictionary<KeyCode, KeyState>();
         buttons = new List<KeyCode>();
 
-        KeyCode[] allButtons = { KeyCode.A, KeyCode.D, KeyCode.LeftArrow, KeyCode.RightArrow,
-            KeyCode.DownArrow, KeyCode.UpArrow, KeyCode.Return, KeyCode.Escape };
+        KeyCode[] allButtons = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Return,
+            KeyCode.E, KeyCode.Q, KeyCode.Tab, KeyCode.Escape };
 
         foreach (KeyCode button in allButtons)
         {
