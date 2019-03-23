@@ -12,12 +12,6 @@ public class GridOverlay : MonoBehaviour {
 		AlignGridWithMap ();
 		SetGridDimensions ();
 	}
-	
-	void Update () {
-	/*	if (Input.GetKeyUp(KeyCode.Return)) {
-			Debug.Log(map.GetMapTileAt(cursorRow, cursorColumn).Type);
-		} */
-	}
 
 	/* The grid origin is set to the bottom left corner */
 	void AlignGridWithMap() {
