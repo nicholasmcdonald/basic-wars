@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Cursor : MonoBehaviour, SelectionStateObserver
+public class Cursor : MonoBehaviour, MapActionStateObserver
 {
     private Map map;
     private int cursorRow = 0;
@@ -19,7 +19,7 @@ public class Cursor : MonoBehaviour, SelectionStateObserver
         PositionCursor();
     }
 
-    public void ChangeSelectionState(SelectionState newSelectionState)
+    public void ChangeSelectionState(MapActionState newActionState)
     {
         // Change graphic
     }
