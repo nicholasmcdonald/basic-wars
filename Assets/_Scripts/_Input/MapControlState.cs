@@ -10,10 +10,14 @@ public class MapControlState : MonoBehaviour, ControlObserver
 
     private float arrowKeyActivationTime;
     private bool arrowKeyHeld;
+    private SelectionState currentSelectionState;
+    private List<SelectionStateObserver> selectionStateObservers;
 
     void Start()
     {
         GetComponent<InputManager>().ControlState = this;
+        currentSelectionState = SelectionState.NoSelection;
+        selectionStateObservers = new List<SelectionStateObserver>();
     }
 
     public void Notify(Dictionary<KeyCode, KeyState> inputs)
@@ -73,6 +77,13 @@ public class MapControlState : MonoBehaviour, ControlObserver
             return -1;
         else
             return 0;
+    }
+
+    private void SetSelectionState(SelectionState selectionState)
+    {
+        currentSelectionState = selectionState;
+        foreach (SelectionStateObserver observer in selectionStateObservers)
+            observer.ChangeSelectionState(currentSelectionState);
     }
 }
 

@@ -1,19 +1,35 @@
 ﻿using UnityEngine;
 
-public class Cursor : MonoBehaviour
+public class Cursor : MonoBehaviour, SelectionStateObserver
 {
-    public Map map;
-
+    private Map map;
     private int cursorRow = 0;
     private int cursorColumn = 0;
 
-    private void Start()
+    public MapTile HighlightedTile
     {
+        get
+        {
+            return map.GetMapTileAt(cursorRow, cursorColumn);
+        }
+    }
+
+    void Start()
+    {
+        map = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>();
         cursorRow = (int)System.Math.Floor(map.rows / 2.0);
         cursorColumn = (int)System.Math.Floor(map.columns / 2.0);
         PositionCursor();
     }
 
+    public void ChangeSelectionState(SelectionState newSelectionState)
+    {
+        // Change graphic
+    }
+
+    /**
+     * Move the cursor to a neighbouring tile.
+     **/
     public void Move(int verticalMovement, int horizontalMovement)
     {
         cursorRow += verticalMovement;

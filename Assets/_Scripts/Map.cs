@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Map : MonoBehaviour {
+public class Map : MonoBehaviour, SelectionStateObserver {
 	public int rows;
 	public int columns;
 	public MapTile mapTilePrefab;
@@ -48,4 +48,9 @@ public class Map : MonoBehaviour {
 	public bool CheckBoundsFor(int row, int column) {
 		return (row >= 0 && row < rows && column >= 0 && column < columns);
 	}
+
+    public void ChangeSelectionState(SelectionState newSelcetionState)
+    {
+        // Tell the navmap
+    }
 }
