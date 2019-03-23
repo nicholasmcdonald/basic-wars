@@ -8,10 +8,7 @@ public class Cursor : MonoBehaviour, SelectionStateObserver
 
     public MapTile HighlightedTile
     {
-        get
-        {
-            return map.GetMapTileAt(cursorRow, cursorColumn);
-        }
+        get { return map.GetMapTileAt(cursorRow, cursorColumn); }
     }
 
     void Start()

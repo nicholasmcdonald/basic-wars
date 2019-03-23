@@ -8,6 +8,11 @@ public class Map : MonoBehaviour, SelectionStateObserver {
 	public int columns;
 	public MapTile mapTilePrefab;
 
+    public NavMap NavMap
+    {
+        get { return GetComponent<NavMap>(); }
+    }
+
 	private List<List<MapTile>> map;
 
 	void Start() {
