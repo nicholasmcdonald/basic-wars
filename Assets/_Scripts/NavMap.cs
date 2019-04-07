@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 
-public class NavMap : MonoBehaviour
+public class NavMap : MonoBehaviour, MapActionStateObserver
 {
-    private bool[,] grid;
+    [SerializeField]
     private Map map;
+    [SerializeField]
+    private OverlayManager overlayManager;
+    [SerializeField]
+    private Cursor cursor;
+
+    private bool[,] grid;
+    private MapTile selectedTile;
 
     public bool this[int row, int column]
     {
@@ -12,8 +19,21 @@ public class NavMap : MonoBehaviour
 
     void Start()
     {
-        this.map = GetComponent<Map>();
         grid = new bool[map.rows, map.columns];
+    }
+
+    public void ChangeSelectionState(MapActionState newState)
+    {
+        // Generate new navmap appropriate for given state
+        // then inform OverlayManager
+        if (newState == MapActionState.NoSelection)
+        {
+            // Change unit animation state if necessary
+            selectedTile = null;
+            GenerateBasicNav();
+        }
+
+        overlayManager.ChangeOverlay(this, newState);
     }
 
     /**

@@ -2,11 +2,11 @@
 
 public class OverlayManager : MonoBehaviour
 {
+    [SerializeField]
     private Map map;
 
     void Start()
     {
-        map = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>();
         transform.position = new Vector2(0, 0);
         GenerateOverlay();
     }
@@ -17,7 +17,7 @@ public class OverlayManager : MonoBehaviour
         // Potentially use class to hide algorithm
     }
 
-    private void ChangeOverlay()
+    public void ChangeOverlay(NavMap navMap, MapActionState state)
     {
         // Need to know MapActionState to figure out colours
         // Need navmap to figure out display area

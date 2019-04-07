@@ -6,7 +6,15 @@ public class Cursor : MonoBehaviour, MapActionStateObserver
     private int cursorRow = 0;
     private int cursorColumn = 0;
 
-    public MapTile HighlightedTile
+    /**
+     * The tile clicked when the last MapActionState change occurred
+     */
+    public MapTile SelectedTile { get; private set; }
+
+    /**
+    * The tile currently pointed at
+    */
+    public MapTile HoveredTile
     {
         get { return map.GetMapTileAt(cursorRow, cursorColumn); }
     }
@@ -21,7 +29,19 @@ public class Cursor : MonoBehaviour, MapActionStateObserver
 
     public void ChangeSelectionState(MapActionState newActionState)
     {
-        // Change graphic
+        if (newActionState == MapActionState.NoSelection)
+        {
+            SelectedTile = null;
+        }
+        else if (newActionState == MapActionState.Movement)
+        {
+            SelectedTile = HoveredTile;
+            // Change graphic
+        }
+        else if (newActionState == MapActionState.Attack)
+        {
+            // etc...
+        }
     }
 
     /**

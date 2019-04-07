@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Map : MonoBehaviour, MapActionStateObserver {
+public class Map : MonoBehaviour {
 	public int rows;
 	public int columns;
 	public MapTile mapTilePrefab;
@@ -42,7 +41,7 @@ public class Map : MonoBehaviour, MapActionStateObserver {
 			int row = (int)(unit.transform.position.y);
 			int column = (int)(unit.transform.position.x);
 
-			map [row] [column].SetOccupant (unit.GetComponent<Unit>());
+			map [row] [column].Occupant = unit.GetComponent<Unit>();
 		}
 	}
 
@@ -53,9 +52,4 @@ public class Map : MonoBehaviour, MapActionStateObserver {
 	public bool CheckBoundsFor(int row, int column) {
 		return (row >= 0 && row < rows && column >= 0 && column < columns);
 	}
-
-    public void ChangeSelectionState(MapActionState newActionState)
-    {
-        // Tell the navmap
-    }
 }
