@@ -1,25 +1,45 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class OverlayManager : MonoBehaviour
 {
     [SerializeField]
     private Map map;
+    [SerializeField]
+    private TileBase tile;
 
-    void Start()
+    /**
+     * Paint a NavMap as an overlay of the terrain map, with the tile colour
+     * determined by the MapActionState.
+     */
+    public void PaintOverlay(NavMap navMap, MapActionState state)
     {
-        transform.position = new Vector2(0, 0);
-        GenerateOverlay();
+        SetTileColour(state);
+        PaintTiles(navMap);
     }
 
-    private void GenerateOverlay()
+    private void PaintTiles(NavMap navMap)
     {
-        // Make an invisible grid over the map, filled with Overlay Tile prefabs
-        // Potentially use class to hide algorithm
+        Tilemap tilemap = GetComponent<Tilemap>();
+        for (int row = 0; row < map.rows; row++)
+        {
+            for (int column = 0; column < map.columns; column++)
+            {
+                if (navMap[row, column] == true)
+                    tilemap.SetTile(new Vector3Int(row, column, 0), tile);
+                else
+                    tilemap.SetTile(new Vector3Int(row, column, 0), null);
+            }
+        }
     }
 
-    public void ChangeOverlay(NavMap navMap, MapActionState state)
+    private void SetTileColour(MapActionState state)
     {
-        // Need to know MapActionState to figure out colours
-        // Need navmap to figure out display area
+        Tilemap tilemap = GetComponent<Tilemap>();
+
+        switch (state)
+        {
+            case MapActionState.NoSelection: tilemap.color = Color.clear; break;
+        }
     }
 }
