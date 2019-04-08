@@ -3,19 +3,20 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour {
-	public int rows;
-	public int columns;
-	public MapTile mapTilePrefab;
+    [SerializeField]
+	private MapTile mapTilePrefab;
+    private List<List<MapTile>> map;
 
-    public NavMap NavMap
-    {
-        get { return GetComponent<NavMap>(); }
-    }
-
-	private List<List<MapTile>> map;
+    public int Rows { get; private set; }
+    public int Columns { get; private set; }
 
 	void Start() {
-		GenerateMapDataStructures ();
+        // Cache map dimensions
+        Vector3Int size = GetComponent<Tilemap>().size;
+        Rows = size.y;
+        Columns = size.x;
+
+        GenerateMapDataStructures ();
 		SetSpawnedOccupancies ();
 	}
 
@@ -24,10 +25,10 @@ public class Map : MonoBehaviour {
 		Transform terrainHolder = GameObject.FindGameObjectWithTag ("Terrain").transform;
 
 		map = new List<List<MapTile>> ();
-		for (int i = 0; i < rows; i++) {
+		for (int i = 0; i < Rows; i++) {
 			List<MapTile> currentRow = new List<MapTile> ();
 			map.Add (currentRow);
-			for (int j = 0; j < columns; j++) {
+			for (int j = 0; j < Columns; j++) {
 				MapTile currentTile = Instantiate (mapTilePrefab, transform) as MapTile;
 				Transform currentTerrain = terrainHolder.Find (tilemap.GetTile (new Vector3Int (j, i, 0)).name);
 				currentTile.SetTerrain (currentTerrain.GetComponent<TerrainTile>());
@@ -50,6 +51,6 @@ public class Map : MonoBehaviour {
 	}
 
 	public bool CheckBoundsFor(int row, int column) {
-		return (row >= 0 && row < rows && column >= 0 && column < columns);
+		return (row >= 0 && row < Rows && column >= 0 && column < Columns);
 	}
 }

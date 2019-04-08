@@ -19,7 +19,8 @@ public class NavMap : MonoBehaviour, MapActionStateObserver
 
     void Start()
     {
-        grid = new bool[map.rows, map.columns];
+        grid = new bool[map.Rows, map.Columns];
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<MapControlState>().RegisterActionStateObserver(this);
     }
 
     public void ChangeSelectionState(MapActionState newState)
@@ -33,7 +34,7 @@ public class NavMap : MonoBehaviour, MapActionStateObserver
             GenerateBasicNav();
         }
 
-        overlayManager.ChangeOverlay(this, newState);
+        overlayManager.PaintOverlay(this, newState);
     }
 
     /**
@@ -41,9 +42,9 @@ public class NavMap : MonoBehaviour, MapActionStateObserver
      **/
     public void GenerateBasicNav()
     {
-        for (int row = 0; row < map.rows; row++)
+        for (int row = 0; row < map.Rows; row++)
         {
-            for (int column = 0; column < map.columns; column++)
+            for (int column = 0; column < map.Columns; column++)
             {
                 grid[row, column] = true;
             }

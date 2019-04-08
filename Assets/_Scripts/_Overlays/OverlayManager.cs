@@ -21,9 +21,9 @@ public class OverlayManager : MonoBehaviour
     private void PaintTiles(NavMap navMap)
     {
         Tilemap tilemap = GetComponent<Tilemap>();
-        for (int row = 0; row < map.rows; row++)
+        for (int row = 0; row < map.Rows; row++)
         {
-            for (int column = 0; column < map.columns; column++)
+            for (int column = 0; column < map.Columns; column++)
             {
                 if (navMap[row, column] == true)
                     tilemap.SetTile(new Vector3Int(row, column, 0), tile);
