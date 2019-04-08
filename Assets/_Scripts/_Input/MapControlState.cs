@@ -13,7 +13,7 @@ public class MapControlState : MonoBehaviour, ControlObserver
     private MapActionState currentSelectionState;
     private List<MapActionStateObserver> selectionStateObservers;
 
-    void Start()
+    void Awake()
     {
         GetComponent<InputManager>().ControlState = this;
         currentSelectionState = MapActionState.NoSelection;
@@ -24,6 +24,13 @@ public class MapControlState : MonoBehaviour, ControlObserver
     {
         if (!CheckAllArrowsReleased(inputs) || arrowKeyHeld)
             HandleArrows(inputs);
+        if (inputs[KeyCode.Return] == KeyState.Held)
+            SetActionState(MapActionState.NoSelection);
+    }
+
+    public void RegisterActionStateObserver(MapActionStateObserver subscriber)
+    {
+        selectionStateObservers.Add(subscriber);
     }
 
     void HandleArrows(Dictionary<KeyCode, KeyState> inputs)
