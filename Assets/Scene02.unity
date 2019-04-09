@@ -271,38 +271,14 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  m_TileSpriteArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  m_TileMatrixArray:
-  - m_RefCount: 0
-    m_Data:
-      e00: 0
-      e01: 0.1158821
-      e02: NaN
-      e03: 139.74084
-      e10: 0
-      e11: 0
-      e12: NaN
-      e13: 1e-45
-      e20: 3.188302e-39
-      e21: 22.895897
-      e22: 5.915536
-      e23: 0
-      e30: 0
-      e31: 1e-45
-      e32: 1e-45
-      e33: 0
-  m_TileColorArray:
-  - m_RefCount: 0
-    m_Data: {r: 1.7e-44, g: 1.7e-44, b: 1.7e-44, a: 1.7e-44}
+  m_TileAssetArray: []
+  m_TileSpriteArray: []
+  m_TileMatrixArray: []
+  m_TileColorArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 17, y: 10, z: 1}
+  m_Size: {x: 0, y: 0, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2027,8 +2003,8 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: -3, z: 0}
-  m_Size: {x: 15, y: 13, z: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 15, y: 10, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2060,8 +2036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734a2f54277544e98b9aea9830f9d5dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 7
-  columns: 12
   mapTilePrefab: {fileID: 114560968481707770, guid: b638094f1da2943b188aec2380b55eac,
     type: 3}
 --- !u!1001 &1735419761
@@ -2220,7 +2194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4877221756026280, guid: 3071b010925ee4b259f004b91180824f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 212043293728049562, guid: 3071b010925ee4b259f004b91180824f,
         type: 3}
