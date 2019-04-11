@@ -3,6 +3,8 @@
 public class Cursor : MonoBehaviour, MapActionStateObserver
 {
     private Map map;
+    [SerializeField]
+    private CameraController camera;
     private int cursorRow = 0;
     private int cursorColumn = 0;
 
@@ -47,25 +49,39 @@ public class Cursor : MonoBehaviour, MapActionStateObserver
     /**
      * Move the cursor to a neighbouring tile.
      **/
-    public void Move(int verticalMovement, int horizontalMovement)
+    public void Move(Vector2Int motion)
     {
-        cursorRow += verticalMovement;
-        if (cursorRow < 0)
-            cursorRow = 0;
-        if (cursorRow >= map.Rows)
-            cursorRow = map.Rows - 1;
+        Vector2Int safeTarget = GetSafeTarget(motion);
+        PositionCursor(safeTarget);
+        camera.MoveToKeepCursorInFocus(safeTarget, motion);
+    }
 
-        cursorColumn += horizontalMovement;
-        if (cursorColumn < 0)
-            cursorColumn = 0;
-        if (cursorColumn >= map.Columns)
-            cursorColumn = map.Columns - 1;
+    Vector2Int GetSafeTarget(Vector2Int motion)
+    {
+        Vector2Int safeTarget = new Vector2Int(cursorColumn, cursorRow) + motion;
 
-        PositionCursor();
+        if (safeTarget.y <= 0)
+            safeTarget.y = 0;
+        else if (safeTarget.y >= map.Rows)
+            safeTarget.y = map.Rows - 1;
+
+        if (safeTarget.x <= 0)
+            safeTarget.x = 0;
+        else if (safeTarget.x >= map.Columns)
+            safeTarget.x = map.Columns - 1;
+
+        return safeTarget;
     }
 
     void PositionCursor()
     {
+        transform.localPosition = new Vector2(cursorColumn + 0.5f, cursorRow + 0.5f);
+    }
+
+    void PositionCursor(Vector2Int target)
+    {
+        cursorRow = target.y;
+        cursorColumn = target.x;
         transform.localPosition = new Vector2(cursorColumn + 0.5f, cursorRow + 0.5f);
     }
 }

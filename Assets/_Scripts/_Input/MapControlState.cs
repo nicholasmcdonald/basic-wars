@@ -61,7 +61,7 @@ public class MapControlState : MonoBehaviour, ControlObserver
             arrowKeyHeld = true;
         }
 
-        cursor.Move(verticalMovement, horizontalMovement);
+        cursor.Move(new Vector2Int(horizontalMovement, verticalMovement));
     }
 
     private bool CheckAllArrowsReleased(Dictionary<KeyCode, KeyState> inputs)

@@ -50,7 +50,15 @@ public class Map : MonoBehaviour {
 		return map [row] [column];
 	}
 
+    /**
+     * Returns true if the passed coordinate is within the map
+     */
 	public bool CheckBoundsFor(int row, int column) {
 		return (row >= 0 && row < Rows && column >= 0 && column < Columns);
 	}
+
+    public bool CheckBoundsFor(Vector2 tile)
+    {
+        return (tile.y >= 0 && tile.y < Rows && tile.x >= 0 && tile.x < Columns);
+    }
 }
