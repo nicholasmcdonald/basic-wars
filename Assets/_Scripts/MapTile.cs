@@ -21,7 +21,7 @@ public class MapTile : MonoBehaviour {
 		this.position = position;
 	}
 
-	public int GetMovementCostFor(Unit unit) {
-		return terrain.MovementCostFor (unit.movementType);
+	public int GetMovementCostFor(MovementType movementType) {
+		return terrain.MovementCostFor (movementType);
 	}
 }
