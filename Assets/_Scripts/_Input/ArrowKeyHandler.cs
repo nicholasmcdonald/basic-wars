@@ -19,14 +19,19 @@ public class ArrowKeyHandler
     public void HandleArrowKeys(Dictionary<KeyCode, KeyState> inputs)
     {
         // On key release stop scroll and reset rate limiter
-        if (arrowKeyHeld && AllArrowKeysReleased(inputs))
-            DeactivateScroll();
-
-        // Ignore key inputs received between rate intervals
-        if (arrowKeyActivationTime < Time.time)
+        if (AllArrowKeysReleased(inputs))
         {
-            MoveCursor(inputs);
-            SetRateLimiter();
+            if (arrowKeyHeld)
+                DeactivateScroll();
+        }
+        else
+        {
+            // Ignore key inputs received between rate intervals
+            if (arrowKeyActivationTime <= Time.time)
+            {
+                MoveCursor(inputs);
+                SetRateLimiter();
+            }
         }
     }
 
