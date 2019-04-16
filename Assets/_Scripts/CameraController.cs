@@ -28,11 +28,21 @@ public class CameraController : MonoBehaviour
         Vector2Int origin = destination - motion;
         int motionX = 0, motionY = 0;
 
+        // The camera remains in place unless the cursor is moving into a boundary.
+        // Consider both axes separately.
         if (CursorIsMovingIntoHorizontalBoundary(origin, destination))
             motionX = motion.x;
         if (CursorIsMovingIntoVerticalBoundary(origin, destination))
             motionY = motion.y;
         Vector2Int cameraMotion = new Vector2Int(motionX, motionY);
+       
+        // This accounts for the cursor moving diagonally into a corner when
+        // the camera is already at the edge of one axis of the map.
+        Vector2Int targetTile = GetTileRevealedByMotion(cameraMotion);
+        if (targetTile.x < 0 || targetTile.x >= map.Columns)
+            cameraMotion.x = 0;
+        if (targetTile.y < 0 || targetTile.y >= map.Rows)
+            cameraMotion.y = 0;
 
         bool cameraStaysWithinMapBounds = map.CheckBoundsFor(GetTileRevealedByMotion(cameraMotion));
 
@@ -42,6 +52,7 @@ public class CameraController : MonoBehaviour
 
     bool CursorIsMovingIntoVerticalBoundary(Vector2Int origin, Vector2Int destination)
     {
+        // Needs to consider if the camera can move that way at all
         return InUpDownBoundary(destination.y) && !InUpDownBoundary(origin.y);
     }
 
