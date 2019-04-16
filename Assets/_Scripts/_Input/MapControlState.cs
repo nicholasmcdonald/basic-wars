@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class MapControlState : MonoBehaviour, ControlObserver
 {
-    public Cursor cursor;
-
-    private const float SCROLL_START_TIME = 0.2f;
-    private const float SCROLL_CONTINUE_TIME = 0.05f;
+    [SerializeField]
+    private Cursor cursor;
 
     private ArrowKeyHandler arrowKeyHandler;
     private MapActionState currentSelectionState;
@@ -22,7 +20,7 @@ public class MapControlState : MonoBehaviour, ControlObserver
 
     public void Notify(Dictionary<KeyCode, KeyState> inputs)
     {
-        arrowKeyHandler.DoStuff(inputs);
+        arrowKeyHandler.HandleArrowKeys(inputs);
         if (inputs[KeyCode.Return] == KeyState.Held)
             SetActionState(MapActionState.NoSelection);
     }

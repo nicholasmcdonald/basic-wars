@@ -16,44 +16,42 @@ public class ArrowKeyHandler
         this.cursor = cursor;
     }
 
-    public void DoStuff(Dictionary<KeyCode, KeyState> inputs)
-    {
-        if (!CheckAllArrowsReleased(inputs) || arrowKeyHeld)
-            HandleArrows(inputs);
-    }
-
-    void HandleArrows(Dictionary<KeyCode, KeyState> inputs)
+    public void HandleArrowKeys(Dictionary<KeyCode, KeyState> inputs)
     {
         // On key release stop scroll and reset rate limiter
-        if (CheckAllArrowsReleased(inputs))
-        {
-            arrowKeyHeld = false;
-            arrowKeyActivationTime = 0.0f;
-            return;
-        }
+        if (arrowKeyHeld && AllArrowKeysReleased(inputs))
+            DeactivateScroll();
 
         // Ignore key inputs received between rate intervals
-        if (arrowKeyActivationTime > Time.time)
-            return;
+        if (arrowKeyActivationTime < Time.time)
+        {
+            MoveCursor(inputs);
+            SetRateLimiter();
+        }
+    }
 
+    void DeactivateScroll()
+    {
+        arrowKeyHeld = false;
+        arrowKeyActivationTime = 0.0f;
+    }
+
+    void MoveCursor(Dictionary<KeyCode, KeyState> inputs)
+    {
         int verticalMovement = GetInputAxisValue(inputs[KeyCode.S], inputs[KeyCode.W]);
         int horizontalMovement = GetInputAxisValue(inputs[KeyCode.A], inputs[KeyCode.D]);
-
-        // Change the rate limiter based on whether scrolling has already started
-        if (arrowKeyHeld)
-        {
-            arrowKeyActivationTime = Time.time + SCROLL_CONTINUE_TIME;
-        }
-        else
-        {
-            arrowKeyActivationTime = Time.time + SCROLL_START_TIME;
-            arrowKeyHeld = true;
-        }
-
         cursor.Move(new Vector2Int(horizontalMovement, verticalMovement));
     }
 
-    private bool CheckAllArrowsReleased(Dictionary<KeyCode, KeyState> inputs)
+    void SetRateLimiter()
+    {
+        // Change the rate limiter based on whether scrolling has already started
+        float limit = arrowKeyHeld ? SCROLL_CONTINUE_TIME : SCROLL_START_TIME;
+        arrowKeyActivationTime = Time.time + limit;
+        arrowKeyHeld = true;
+    }
+
+    private bool AllArrowKeysReleased(Dictionary<KeyCode, KeyState> inputs)
     {
         var arrowKeys = new List<KeyCode> { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
         foreach (KeyCode arrow in arrowKeys)
