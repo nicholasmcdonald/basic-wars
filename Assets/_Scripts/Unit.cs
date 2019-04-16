@@ -26,16 +26,6 @@ public class Unit : MonoBehaviour {
 
 	private int currentMovementPoints;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public bool CanMoveDistance(int distance) {
 		return currentMovementPoints >= distance 
 			&& gas >= (distance * gasMovementConsumption);

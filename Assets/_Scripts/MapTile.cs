@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MapTile : MonoBehaviour {
 	public string Type {
@@ -9,23 +7,14 @@ public class MapTile : MonoBehaviour {
 		}
 	}
 
-	public string Occupant {
-		get {
-			return unit.unitName;
-		}
-	}
+	public Unit Occupant { get; set; }
 
 	private Vector3Int position;
 	private TerrainTile terrain;
-	private Unit unit;
 	// building
 
 	public void SetTerrain(TerrainTile terrain) {
 		this.terrain = terrain;
-	}
-
-	public void SetOccupant(Unit unit) {
-		this.unit = unit;
 	}
 
 	public void SetPosition(Vector3Int position) {

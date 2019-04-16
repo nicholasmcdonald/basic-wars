@@ -1,17 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Map : MonoBehaviour, SelectionStateObserver {
-	public int rows;
-	public int columns;
-	public MapTile mapTilePrefab;
+public class Map : MonoBehaviour {
+    [SerializeField]
+	private MapTile mapTilePrefab;
+    private List<List<MapTile>> map;
 
-	private List<List<MapTile>> map;
+    public int Rows { get; private set; }
+    public int Columns { get; private set; }
 
 	void Start() {
-		GenerateMapDataStructures ();
+        // Cache map dimensions
+        Vector3Int size = GetComponent<Tilemap>().size;
+        Rows = size.y;
+        Columns = size.x;
+
+        GenerateMapDataStructures ();
 		SetSpawnedOccupancies ();
 	}
 
@@ -20,10 +25,10 @@ public class Map : MonoBehaviour, SelectionStateObserver {
 		Transform terrainHolder = GameObject.FindGameObjectWithTag ("Terrain").transform;
 
 		map = new List<List<MapTile>> ();
-		for (int i = 0; i < rows; i++) {
+		for (int i = 0; i < Rows; i++) {
 			List<MapTile> currentRow = new List<MapTile> ();
 			map.Add (currentRow);
-			for (int j = 0; j < columns; j++) {
+			for (int j = 0; j < Columns; j++) {
 				MapTile currentTile = Instantiate (mapTilePrefab, transform) as MapTile;
 				Transform currentTerrain = terrainHolder.Find (tilemap.GetTile (new Vector3Int (j, i, 0)).name);
 				currentTile.SetTerrain (currentTerrain.GetComponent<TerrainTile>());
@@ -37,7 +42,7 @@ public class Map : MonoBehaviour, SelectionStateObserver {
 			int row = (int)(unit.transform.position.y);
 			int column = (int)(unit.transform.position.x);
 
-			map [row] [column].SetOccupant (unit.GetComponent<Unit>());
+			map [row] [column].Occupant = unit.GetComponent<Unit>();
 		}
 	}
 
@@ -45,12 +50,15 @@ public class Map : MonoBehaviour, SelectionStateObserver {
 		return map [row] [column];
 	}
 
+    /**
+     * Returns true if the passed coordinate is within the map
+     */
 	public bool CheckBoundsFor(int row, int column) {
-		return (row >= 0 && row < rows && column >= 0 && column < columns);
+		return (row >= 0 && row < Rows && column >= 0 && column < Columns);
 	}
 
-    public void ChangeSelectionState(SelectionState newSelcetionState)
+    public bool CheckBoundsFor(Vector2 tile)
     {
-        // Tell the navmap
+        return (tile.y >= 0 && tile.y < Rows && tile.x >= 0 && tile.x < Columns);
     }
 }

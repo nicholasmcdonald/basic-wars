@@ -1,54 +1,87 @@
 ﻿using UnityEngine;
 
-public class Cursor : MonoBehaviour, SelectionStateObserver
+public class Cursor : MonoBehaviour, MapActionStateObserver
 {
     private Map map;
+    [SerializeField]
+    private CameraController camera;
     private int cursorRow = 0;
     private int cursorColumn = 0;
 
-    public MapTile HighlightedTile
+    /**
+     * The tile clicked when the last MapActionState change occurred
+     */
+    public MapTile SelectedTile { get; private set; }
+
+    /**
+    * The tile currently pointed at
+    */
+    public MapTile HoveredTile
     {
-        get
-        {
-            return map.GetMapTileAt(cursorRow, cursorColumn);
-        }
+        get { return map.GetMapTileAt(cursorRow, cursorColumn); }
     }
 
     void Start()
     {
         map = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>();
-        cursorRow = (int)System.Math.Floor(map.rows / 2.0);
-        cursorColumn = (int)System.Math.Floor(map.columns / 2.0);
+        cursorRow = (int)System.Math.Floor(map.Rows / 2.0);
+        cursorColumn = (int)System.Math.Floor(map.Columns / 2.0);
         PositionCursor();
     }
 
-    public void ChangeSelectionState(SelectionState newSelectionState)
+    public void ChangeSelectionState(MapActionState newActionState)
     {
-        // Change graphic
+        if (newActionState == MapActionState.NoSelection)
+        {
+            SelectedTile = null;
+        }
+        else if (newActionState == MapActionState.Movement)
+        {
+            SelectedTile = HoveredTile;
+            // Change graphic
+        }
+        else if (newActionState == MapActionState.Attack)
+        {
+            // etc...
+        }
     }
 
     /**
      * Move the cursor to a neighbouring tile.
      **/
-    public void Move(int verticalMovement, int horizontalMovement)
+    public void Move(Vector2Int motion)
     {
-        cursorRow += verticalMovement;
-        if (cursorRow < 0)
-            cursorRow = 0;
-        if (cursorRow >= map.rows)
-            cursorRow = map.rows - 1;
+        Vector2Int safeTarget = GetSafeTarget(motion);
+        PositionCursor(safeTarget);
+        camera.MoveToKeepCursorInFocus(safeTarget, motion);
+    }
 
-        cursorColumn += horizontalMovement;
-        if (cursorColumn < 0)
-            cursorColumn = 0;
-        if (cursorColumn >= map.columns)
-            cursorColumn = map.columns - 1;
+    Vector2Int GetSafeTarget(Vector2Int motion)
+    {
+        Vector2Int safeTarget = new Vector2Int(cursorColumn, cursorRow) + motion;
 
-        PositionCursor();
+        if (safeTarget.y <= 0)
+            safeTarget.y = 0;
+        else if (safeTarget.y >= map.Rows)
+            safeTarget.y = map.Rows - 1;
+
+        if (safeTarget.x <= 0)
+            safeTarget.x = 0;
+        else if (safeTarget.x >= map.Columns)
+            safeTarget.x = map.Columns - 1;
+
+        return safeTarget;
     }
 
     void PositionCursor()
     {
+        transform.localPosition = new Vector2(cursorColumn + 0.5f, cursorRow + 0.5f);
+    }
+
+    void PositionCursor(Vector2Int target)
+    {
+        cursorRow = target.y;
+        cursorColumn = target.x;
         transform.localPosition = new Vector2(cursorColumn + 0.5f, cursorRow + 0.5f);
     }
 }
