@@ -1,33 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Unit : MonoBehaviour {
-	public string unitName;
-	public int movementRange;
-	public int gas;
-	public int gasMovementConsumption;
-	public int gasDailyConsumption;
-	public MovementType movementType;
+public class Unit : MonoBehaviour, IDailyActor {
+    [SerializeField]
+    private string unitName;
+    [SerializeField]
+    private int movementPoints;
+    [SerializeField]
+    private int maxGas;
+    [SerializeField]
+    private int dailyGasConsumption;
+    [SerializeField]
+    private MovementType movementType;
 
-	public Vector3Int Position {
+    private int currentGas;
+
+    public void OnTurnStart()
+    {
+
+    }
+
+	public Vector2Int Position {
 		get {
 			int row = (int)(transform.position.y);
 			int column = (int)(transform.position.x);
-			return new Vector3Int (column, row, 0);
+			return new Vector2Int (column, row);
 		}
 	}
 
-	public int CurrentMovementPoints {
-		get {
-			return currentMovementPoints;
-		}
-	}
-
-	private int currentMovementPoints;
-
-	public bool CanMoveDistance(int distance) {
-		return currentMovementPoints >= distance 
-			&& gas >= (distance * gasMovementConsumption);
-	}
+    //public bool CanMoveDistance(int distance)
+    //{
+    //    return currentMovementPoints >= distance
+    //        && gas >= (distance * gasMovementConsumption);
+    //}
 }
