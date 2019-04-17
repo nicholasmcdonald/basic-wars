@@ -1,3 +1,3 @@
 ﻿public enum MovementType {
-	Infantry
+	Infantry, MechanizedInfantry, Tires, Treads, Aircraft, Ship
 }
