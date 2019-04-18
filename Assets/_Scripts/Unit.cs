@@ -18,7 +18,7 @@ public class Unit : MonoBehaviour, IDailyActor {
 
     public static bool Spawn(GameObject unitPrefab, Vector2Int position)
     {
-        MapTile targetTile = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>().GetMapTileAt(position.y, position.x);
+        MapTile targetTile = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>().GetMapTileAt(position);
         if (targetTile.Occupant != null)
             return false;
         else

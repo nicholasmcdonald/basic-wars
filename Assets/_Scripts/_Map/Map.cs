@@ -27,8 +27,8 @@ public class Map : MonoBehaviour {
 		}
 	}
 
-	public MapTile GetMapTileAt(int row, int column) {
-		return map [row] [column];
+	public MapTile GetMapTileAt(Vector2Int position) {
+		return map [position.y] [position.x];
 	}
 
     /**

@@ -5,8 +5,7 @@ public class Cursor : MonoBehaviour, MapActionStateObserver
     private Map map;
     [SerializeField]
     private CameraController camera;
-    private int cursorRow = 0;
-    private int cursorColumn = 0;
+    public Vector2Int Position { get; private set; }
 
     /**
      * The tile clicked when the last MapActionState change occurred
@@ -18,20 +17,15 @@ public class Cursor : MonoBehaviour, MapActionStateObserver
     */
     public MapTile HoveredTile
     {
-        get { return map.GetMapTileAt(cursorRow, cursorColumn); }
-    }
-
-    public Vector2Int Position
-    {
-        get { return new Vector2Int(cursorColumn, cursorRow); }
+        get { return map.GetMapTileAt(Position); }
     }
 
     void Start()
     {
         map = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>();
-        cursorRow = (int)System.Math.Floor(map.Rows / 2.0);
-        cursorColumn = (int)System.Math.Floor(map.Columns / 2.0);
-        PositionCursor();
+        var cursorRow = (int)System.Math.Floor(map.Rows / 2.0);
+        var cursorColumn = (int)System.Math.Floor(map.Columns / 2.0);
+        PositionCursor(new Vector2Int(cursorColumn, cursorRow));
     }
 
     public void ChangeSelectionState(MapActionState newActionState)
@@ -63,7 +57,7 @@ public class Cursor : MonoBehaviour, MapActionStateObserver
 
     Vector2Int GetSafeTarget(Vector2Int motion)
     {
-        Vector2Int safeTarget = new Vector2Int(cursorColumn, cursorRow) + motion;
+        Vector2Int safeTarget = new Vector2Int(Position.x, Position.y) + motion;
 
         if (safeTarget.y <= 0)
             safeTarget.y = 0;
@@ -78,15 +72,9 @@ public class Cursor : MonoBehaviour, MapActionStateObserver
         return safeTarget;
     }
 
-    void PositionCursor()
-    {
-        transform.localPosition = new Vector2(cursorColumn + 0.5f, cursorRow + 0.5f);
-    }
-
     void PositionCursor(Vector2Int target)
     {
-        cursorRow = target.y;
-        cursorColumn = target.x;
-        transform.localPosition = new Vector2(cursorColumn + 0.5f, cursorRow + 0.5f);
+        Position = target;
+        transform.localPosition = new Vector2(Position.x + 0.5f, Position.y + 0.5f);
     }
 }

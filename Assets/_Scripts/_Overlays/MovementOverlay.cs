@@ -51,26 +51,26 @@ public class MovementOverlay : MonoBehaviour {
 	//	return null;
 	//}
 
-	private bool HasBeenChecked;
+	//private bool HasBeenChecked;
 
-	private void AddNeighboursToFrontier(Queue<MapTile> frontier, Vector3Int position) {
-		int row = position.y;
-		int column = position.x;
+	//private void AddNeighboursToFrontier(Queue<MapTile> frontier, Vector3Int position) {
+	//	int row = position.y;
+	//	int column = position.x;
 
-		// North
-		if (map.CheckBoundsFor (row + 1, column))
-			frontier.Enqueue (map.GetMapTileAt (row + 1, column));
+	//	// North
+	//	if (map.CheckBoundsFor (row + 1, column))
+	//		frontier.Enqueue (map.GetMapTileAt (row + 1, column));
 
-		// East
-		if (map.CheckBoundsFor (row, column + 1))
-			frontier.Enqueue (map.GetMapTileAt (row, column + 1));
+	//	// East
+	//	if (map.CheckBoundsFor (row, column + 1))
+	//		frontier.Enqueue (map.GetMapTileAt (row, column + 1));
 
-		// South
-		if (map.CheckBoundsFor (row - 1, column))
-			frontier.Enqueue (map.GetMapTileAt (row - 1, column));
+	//	// South
+	//	if (map.CheckBoundsFor (row - 1, column))
+	//		frontier.Enqueue (map.GetMapTileAt (row - 1, column));
 
-		// West
-		if (map.CheckBoundsFor (row, column - 1))
-			frontier.Enqueue (map.GetMapTileAt (row, column - 1));
-	}
+	//	// West
+	//	if (map.CheckBoundsFor (row, column - 1))
+	//		frontier.Enqueue (map.GetMapTileAt (row, column - 1));
+	//}
 }
