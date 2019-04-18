@@ -4,7 +4,8 @@ using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour {
     [SerializeField]
-	private MapTile mapTilePrefab;
+    private TerrainHost terrainHost;
+
     private List<List<MapTile>> map;
 
     public int Rows { get; private set; }
@@ -29,10 +30,10 @@ public class Map : MonoBehaviour {
 			List<MapTile> currentRow = new List<MapTile> ();
 			map.Add (currentRow);
 			for (int j = 0; j < Columns; j++) {
-				MapTile currentTile = Instantiate (mapTilePrefab, transform) as MapTile;
-				Transform currentTerrain = terrainHolder.Find (tilemap.GetTile (new Vector3Int (j, i, 0)).name);
-				//currentTile.SetTerrain (currentTerrain.GetComponent<TerrainTile>());
-				currentRow.Add (currentTile);
+                string terrainName = tilemap.GetTile(new Vector3Int(j, i, 0)).name;
+                TerrainStats localTerrain = terrainHost[terrainName];
+                MapTile currentTile = new MapTile(localTerrain, transform.position);
+                currentRow.Add (currentTile);
 			}
 		}
 	}

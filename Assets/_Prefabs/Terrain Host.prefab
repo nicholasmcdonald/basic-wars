@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2679754877883913269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4494762803487167683}
+  - component: {fileID: 4457807163073835469}
+  m_Layer: 0
+  m_Name: Terrain Host
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4494762803487167683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2679754877883913269}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4457807163073835469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2679754877883913269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0319d1b067894ec40a8ca863b4d92eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainType:
+  - Field
+  - Mountain
+  - River
+  - Road
+  - Sea
+  - Woods
+  terrainData:
+  - {fileID: 11400000, guid: af61ea03fac465c4e91c67ca1c4fbb4b, type: 2}
+  - {fileID: 11400000, guid: 6a80f427dd544d64f9a6ad0b5625f201, type: 2}
+  - {fileID: 11400000, guid: 25a2979690f8d44439d711638370ffa8, type: 2}
+  - {fileID: 11400000, guid: 16d83c72a9e795d46b91cdbf7a83857f, type: 2}
+  - {fileID: 11400000, guid: 6def07c1edfa2024c95ad3858291461b, type: 2}
+  - {fileID: 11400000, guid: 341374c1d9ae9904596e8c7fca310c6a, type: 2}
