@@ -1,9 +1,0 @@
-Plan:
-
-Draw using Tilemap editor.
-Animate Tiles using editor with RuleTiles.
-In scripts, move map to 0,0.
-Scan map and create Map with Terrain tiles, aligning with X,Y coordinates.
-
-
-
