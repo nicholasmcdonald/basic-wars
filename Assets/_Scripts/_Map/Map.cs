@@ -3,9 +3,6 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour {
-    [SerializeField]
-    private TerrainHost terrainHost;
-
     private List<List<MapTile>> map;
 
     public int Rows { get; private set; }
@@ -17,27 +14,10 @@ public class Map : MonoBehaviour {
         Rows = size.y;
         Columns = size.x;
 
-        GenerateMapDataStructures ();
+        map = new MapGenerator().GenerateMapDataStructures(GetComponent<Tilemap>());
 		SetSpawnedOccupancies ();
 	}
-
-	private void GenerateMapDataStructures() {
-		Tilemap tilemap = GetComponent<Tilemap> ();
-		Transform terrainHolder = GameObject.FindGameObjectWithTag ("Terrain").transform;
-
-		map = new List<List<MapTile>> ();
-		for (int i = 0; i < Rows; i++) {
-			List<MapTile> currentRow = new List<MapTile> ();
-			map.Add (currentRow);
-			for (int j = 0; j < Columns; j++) {
-                string terrainName = tilemap.GetTile(new Vector3Int(j, i, 0)).name;
-                TerrainStats localTerrain = terrainHost[terrainName];
-                MapTile currentTile = new MapTile(localTerrain, transform.position);
-                currentRow.Add (currentTile);
-			}
-		}
-	}
-
+       
 	private void SetSpawnedOccupancies() {
 		foreach (GameObject unit in GameObject.FindGameObjectsWithTag("Unit")) {
 			int row = (int)(unit.transform.position.y);
