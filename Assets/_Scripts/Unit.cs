@@ -2,21 +2,31 @@
 
 public class Unit : MonoBehaviour, IDailyActor {
     [SerializeField]
-    private string unitName;
-    [SerializeField]
-    private int movementPoints;
-    [SerializeField]
-    private int maxGas;
-    [SerializeField]
-    private int dailyGasConsumption;
-    [SerializeField]
-    private MovementType movementType;
+    private UnitStats stats;
 
     private int currentGas;
 
     public void OnTurnStart()
     {
 
+    }
+
+    public void OnSpawn()
+    {
+
+    }
+
+    public static bool Spawn(GameObject unitPrefab, Vector2Int position)
+    {
+        MapTile targetTile = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>().GetMapTileAt(position.y, position.x);
+        if (targetTile.Occupant != null)
+            return false;
+        else
+        {
+            Unit newUnit = Instantiate(unitPrefab, targetTile.WorldPosition, Quaternion.identity).GetComponent<Unit>();
+            targetTile.Occupant = newUnit;
+            return true;
+        }
     }
 
 	public Vector2Int Position {
