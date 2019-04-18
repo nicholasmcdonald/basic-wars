@@ -31,7 +31,7 @@ public class Map : MonoBehaviour {
 			for (int j = 0; j < Columns; j++) {
 				MapTile currentTile = Instantiate (mapTilePrefab, transform) as MapTile;
 				Transform currentTerrain = terrainHolder.Find (tilemap.GetTile (new Vector3Int (j, i, 0)).name);
-				currentTile.SetTerrain (currentTerrain.GetComponent<TerrainTile>());
+				//currentTile.SetTerrain (currentTerrain.GetComponent<TerrainTile>());
 				currentRow.Add (currentTile);
 			}
 		}
