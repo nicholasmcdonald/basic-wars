@@ -92,8 +92,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a018e87030c48cc9db0a5d56de6a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Infantry
-  movementPoints: 0
-  maxGas: 0
-  dailyGasConsumption: 0
-  movementType: 0
+  stats: {fileID: 11400000, guid: ae6f8690ff985d34483738bf39720942, type: 2}

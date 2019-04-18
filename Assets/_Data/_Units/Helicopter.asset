@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e4fcb6333bff13479a160efc1942097, type: 3}
-  m_Name: InfantryData
+  m_Name: Helicopter
   m_EditorClassIdentifier: 
-  unitName: Infantry
+  unitName: Helicopter
   movementPoints: 0
   maxGas: 0
   dailyGasConsumption: 0
-  movementType: 0
+  movementType: 4

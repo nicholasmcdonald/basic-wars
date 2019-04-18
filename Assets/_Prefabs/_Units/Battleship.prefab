@@ -92,8 +92,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a018e87030c48cc9db0a5d56de6a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Battleship
-  movementPoints: 8
-  maxGas: 99
-  dailyGasConsumption: 5
-  movementType: 5
+  stats: {fileID: 11400000, guid: bb80f38ef853ed446bace30e9897a10f, type: 2}
