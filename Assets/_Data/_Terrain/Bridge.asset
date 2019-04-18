@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b94139b94120fb48aab39722281345b, type: 3}
-  m_Name: Field
+  m_Name: Bridge
   m_EditorClassIdentifier: 
-  terrainName: Field
-  baseDefense: 1
-  description: It's a field.
+  terrainName: Bridge
+  baseDefense: 0
+  description: It's a bridge.
   movementCostKey: 000000000100000002000000030000000400000005000000
-  movementCostValue: 010000000100000002000000010000000100000000000000
+  movementCostValue: 010000000100000001000000010000000100000000000000

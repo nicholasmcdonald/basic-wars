@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b94139b94120fb48aab39722281345b, type: 3}
   m_Name: River
   m_EditorClassIdentifier: 
-  terrainName: 
+  terrainName: River
   baseDefense: 0
-  description: 
-  movementCostKey: 
-  movementCostValue: 
+  description: It's a river.
+  movementCostKey: 000000000100000002000000030000000400000005000000
+  movementCostValue: 020000000100000000000000000000000100000000000000

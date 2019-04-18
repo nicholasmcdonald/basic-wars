@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b94139b94120fb48aab39722281345b, type: 3}
   m_Name: Woods
   m_EditorClassIdentifier: 
-  terrainName: 
-  baseDefense: 0
-  description: 
-  movementCostKey: 
-  movementCostValue: 
+  terrainName: Woods
+  baseDefense: 2
+  description: It's woods.
+  movementCostKey: 000000000100000002000000030000000400000005000000
+  movementCostValue: 010000000100000003000000020000000100000000000000

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b94139b94120fb48aab39722281345b, type: 3}
   m_Name: Sea
   m_EditorClassIdentifier: 
-  terrainName: 
+  terrainName: Sea
   baseDefense: 0
-  description: 
-  movementCostKey: 
-  movementCostValue: 
+  description: It's the sea.
+  movementCostKey: 000000000100000002000000030000000400000005000000
+  movementCostValue: 000000000000000000000000000000000100000001000000
