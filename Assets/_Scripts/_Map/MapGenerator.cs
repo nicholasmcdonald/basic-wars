@@ -18,7 +18,7 @@ public class MapGenerator
             {
                 string terrainName = tilemap.GetTile(new Vector3Int(x, y, 0)).name;
                 TerrainStats localTerrain = terrainHost[terrainName];
-                MapTile currentTile = new MapTile(localTerrain, new Vector3(x,y,0));
+                MapTile currentTile = new MapTile(localTerrain, new Vector2Int(x,y));
                 currentRow.Add(currentTile);
             }
         }
