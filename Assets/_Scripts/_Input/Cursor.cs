@@ -21,6 +21,11 @@ public class Cursor : MonoBehaviour, MapActionStateObserver
         get { return map.GetMapTileAt(cursorRow, cursorColumn); }
     }
 
+    public Vector2Int Position
+    {
+        get { return new Vector2Int(cursorColumn, cursorRow); }
+    }
+
     void Start()
     {
         map = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>();
