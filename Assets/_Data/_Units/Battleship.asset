@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Battleship
   m_EditorClassIdentifier: 
   unitName: Battleship
-  movementPoints: 0
-  maxGas: 0
-  dailyGasConsumption: 0
+  movementPoints: 5
+  maxGas: 99
+  dailyGasConsumption: 1
   movementType: 5

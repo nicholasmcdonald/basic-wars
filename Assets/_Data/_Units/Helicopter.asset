@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Helicopter
   m_EditorClassIdentifier: 
   unitName: Helicopter
-  movementPoints: 0
-  maxGas: 0
-  dailyGasConsumption: 0
+  movementPoints: 6
+  maxGas: 99
+  dailyGasConsumption: 2
   movementType: 4

@@ -13,4 +13,10 @@ public class UnitStats : ScriptableObject
     private int dailyGasConsumption;
     [SerializeField]
     private MovementType movementType;
+
+    public string UnitName { get { return unitName; } }
+    public int MovementPoints { get { return movementPoints; } }
+    public int MaxGas { get { return maxGas; } }
+    public int DailyGasConsumption { get { return dailyGasConsumption; } }
+    public MovementType MovementType { get { return movementType; } }
 }

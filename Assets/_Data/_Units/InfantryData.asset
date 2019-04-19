@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: InfantryData
   m_EditorClassIdentifier: 
   unitName: Infantry
-  movementPoints: 0
-  maxGas: 0
+  movementPoints: 3
+  maxGas: 99
   dailyGasConsumption: 0
   movementType: 0
