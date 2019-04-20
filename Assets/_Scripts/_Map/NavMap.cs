@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class NavMap : MonoBehaviour, MapActionStateObserver
 {
@@ -33,6 +34,11 @@ public class NavMap : MonoBehaviour, MapActionStateObserver
             selectedTile = null;
             GenerateBasicNav();
         }
+        else if (newState == MapActionState.Movement)
+        {
+            Debug.Log("Selection state engaged!");
+            selectedTile = cursor.HoveredTile;
+        }
 
         overlayManager.PaintOverlay(this, newState);
     }
@@ -56,7 +62,61 @@ public class NavMap : MonoBehaviour, MapActionStateObserver
      **/
     public void GenerateMovementNav(Unit selectedUnit)
     {
+        ClearNavMap();
+        Vector2Int origin = selectedUnit.Position;
 
+        Queue<MapTile> frontier = new Queue<MapTile>();
+        List<MapTile> visited = new List<MapTile>();
+        List<MapTile> candidates = new List<MapTile>();
+
+        // Bypass origin
+        MapTile startTile = map.GetMapTileAt(origin);
+        AddNeighboursToFrontier(frontier, origin);
+        visited.Add(startTile);
+
+        // Do BFS on frontier
+        while (frontier.Count > 0)
+        {
+            MapTile currentTile = frontier.Dequeue();
+            if (visited.Contains(currentTile))
+                continue;
+            else
+                visited.Add(currentTile);
+
+            if (!selectedUnit.CanMoveIntoTile(currentTile))
+                continue;
+            else
+            {
+                candidates.Add(currentTile);
+                //AddNeighboursToFrontier(frontier, );
+            }
+
+            //	}
+
+            //	return null;
+        }
+    }
+
+    private void AddNeighboursToFrontier(Queue<MapTile> frontier, Vector2Int position)
+    {
+        int row = position.y;
+        int column = position.x;
+
+        // North
+        if (map.CheckBoundsFor(row + 1, column))
+            frontier.Enqueue(map.GetMapTileAt(new Vector2Int(row + 1, column)));
+
+        // East
+        if (map.CheckBoundsFor(row, column + 1))
+            frontier.Enqueue(map.GetMapTileAt(new Vector2Int(row, column + 1)));
+
+        // South
+        if (map.CheckBoundsFor(row - 1, column))
+            frontier.Enqueue(map.GetMapTileAt(new Vector2Int(row - 1, column)));
+
+        // West
+        if (map.CheckBoundsFor(row, column - 1))
+            frontier.Enqueue(map.GetMapTileAt(new Vector2Int(row, column - 1)));
     }
 
     /**
@@ -83,5 +143,12 @@ public class NavMap : MonoBehaviour, MapActionStateObserver
     public void GenerateThreatNav(Unit selectedUnit)
     {
 
+    }
+
+    private void ClearNavMap()
+    {
+        for (int row = 0; row < map.Rows; row++)
+            for (int column = 0; column < map.Columns; column++)
+                grid[row, column] = false;
     }
 }

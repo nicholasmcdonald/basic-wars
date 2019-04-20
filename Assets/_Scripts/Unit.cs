@@ -25,6 +25,7 @@ public class Unit : MonoBehaviour, IDailyActor {
         {
             Unit newUnit = Instantiate(unitPrefab, targetTile.WorldPosition, Quaternion.identity).GetComponent<Unit>();
             targetTile.Occupant = newUnit;
+            newUnit.OnSpawn();
             return true;
         }
     }
@@ -37,9 +38,9 @@ public class Unit : MonoBehaviour, IDailyActor {
 		}
 	}
 
-    //public bool CanMoveDistance(int distance)
-    //{
-    //    return currentMovementPoints >= distance
-    //        && gas >= (distance * gasMovementConsumption);
-    //}
+    public bool CanMoveIntoTile(MapTile tile)
+    {
+        int movementCost = tile.Terrain.MovementCost[stats.MovementType];
+        return stats.MovementPoints >= movementCost && currentGas >= movementCost;
+    }
 }
